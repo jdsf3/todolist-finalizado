@@ -1,0 +1,416 @@
+:root {
+    --fundo-claro: #F7F4FF;
+    --fundo-card-claro: #e8e4f0;
+
+    --letra-escura: #110B1E;
+    --letra-secundária: #66507E;
+
+    --cor-destaque: #BB8BF3;
+
+    --botão-escura-salvarentrar: #8235EF;
+    --botão-claro-salvarentrar: #AD85FA;
+    --cor-icones: #9682B2;
+
+    --sombreado: rgba(0, 0, 0, 0.25);
+    --cor-checkbox-selecionada: #4a325ca8;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "listas tarefas";
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--fundo-claro);
+    font-family: "Antic Didone", serif;
+    height: 100vh;
+}
+
+/* Cards de cada uma das listas */
+
+.card-listas {
+    grid-area: listas;
+    background-color: var(--fundo-card-claro);
+    padding: 30px;
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.card-tarefas {
+    grid-area: tarefas;
+    background-color: var(--fundo-card-claro);
+    padding: 30px;
+    gap: 20px;
+    border-radius: 30px;
+}
+
+/* Barra de pesquisa */
+
+.pesquisar {
+    grid-area: pesquisar;
+    display: flex;
+    gap: 5px;
+    padding: 15px 20px;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 2px 4px var(--sombreado);
+    border-radius: 15px;
+}
+
+.pesquisar input, .pesquisar input {
+    background-color: var(--fundo-card-claro);
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    color: var(--letra-escura);
+    width: 100%;
+    flex: 1;
+}
+
+.pesquisar input::placeholder {
+    color: var(--letra-secundária);
+}
+
+/* Cabeçalho */
+
+.cabecalho {
+    grid-area: cabecalho;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1.3rem;
+}
+
+.cabecalho ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    font-size: 1.25rem;
+}
+
+.cabecalho i {
+    color: var(--cor-icones);
+}
+
+/* Listas */
+
+.lista {
+    grid-area: lista;
+}
+
+.lista-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--fundo-claro);
+    padding: 2.5px 30px;
+    border-radius: 20px;
+    align-items: center;
+    box-shadow: 3px 3px 5px var(--sombreado);
+    margin-bottom: 12px;
+}
+
+.lista-item p {
+    font-size: 1.3rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.lista-item p input {
+    width: 18px;
+    height: 18px;
+}
+
+.lista-item ul {
+    display: flex;
+    list-style: none;
+    font-size: 1.1rem;
+    gap: 25px;
+}
+
+.lista-item i {
+    color: var(--cor-icones);
+}
+
+/* Checkbox da lista de tarefas */
+
+.lista-item form {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    margin: 0;
+}
+
+.lista-item a {
+    flex: 1;
+}
+
+.tarefa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.texto-selecionado {
+    display: inline-block;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.checkbox input {
+    display: none;
+}
+
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.checkbox-box {
+    width: 18px;
+    height: 18px;
+    border: solid 2px var(--cor-icones);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.checkbox-box::after {
+    content: "";
+    width: 5px;
+    height: 10px;
+    border: solid var(--cor-checkbox-selecionada);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+    margin-bottom: 2px;
+}
+
+.checkbox input:checked + .checkbox-box {
+    border-color: var(--cor-checkbox-selecionada);
+}
+
+.checkbox input:checked + .checkbox-box::after {
+    display: block;
+}
+
+.tarefa:has(.checkbox input:checked) .texto-selecionado {
+    color: var(--cor-checkbox-selecionada);
+    text-decoration: line-through;
+}
+
+.checkbox:hover .checkbox-box {
+    border-color: var(--cor-destaque);
+}
+
+/* Lista de tarefas (fica escondida) */
+
+.lista-escondida {
+    display: none;
+}
+
+/* Menu de filtros */
+
+.filtro-container {
+    position: relative;
+}
+
+.btn-filtro {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.menu-filtro {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 190px;
+    background-color: var(--fundo-claro);
+    border-radius: 12px;
+    box-shadow: 3px 3px 8px var(--sombreado);
+    padding: 8px;
+    z-index: 100;
+}
+
+.menu-filtro.ativo {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-filtro a {
+    color: var(--letra-escura);
+    font-size: 1rem;
+    padding: 10px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.menu-filtro a:hover {
+    background-color: var(--fundo-card-claro);
+    color: var(--botão-escura-salvarentrar);
+}
+
+/* Janelas de cadastro e edição */
+
+.janelaNovaTarefa {
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 11, 30, 0.55);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+.janelaNovaTarefa:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.janelaNovaTarefa-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    background-color: var(--fundo-card-claro);
+    padding: 40px;
+    border-radius: 25px;
+    width: 35%;
+    min-height: 220px;
+    box-shadow: 0 10px 30px var(--sombreado);
+
+    border: 1px solid rgba(150, 130, 178, 0.3);
+}
+
+/* Título dos campos */
+
+.janelaNovaTarefa-card label {
+    color: var(--letra-escura);
+    font-size: 1.4rem;
+}
+
+/* Campos de texto */
+
+.janelaNovaTarefa-card input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 18px;
+
+    background-color: var(--fundo-claro);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    outline: none;
+
+    font-family: inherit;
+    font-size: 1.1rem;
+    color: var(--letra-escura);
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.janelaNovaTarefa-card input[type="text"]::placeholder {
+    color: var(--letra-secundária);
+}
+
+.janelaNovaTarefa-card input[type="text"]:focus {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(187, 139, 243, 0.2);
+}
+
+/* Botões */
+
+.janelaNovaTarefa-card .btns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-fechar,
+.btn-salvareentrar {
+    padding: 12px 25px;
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 1.1rem;
+    text-align: center;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Cancelar */
+
+.btn-fechar {
+    color: var(--letra-secundária);
+    background-color: transparent;
+    border: 2px solid var(--cor-icones);
+}
+
+.btn-fechar:hover {
+    background-color: rgba(150, 130, 178, 0.15);
+}
+
+/* Salvar */
+
+.btn-salvareentrar {
+    color: white;
+    background-color: var(--botão-escura-salvarentrar);
+    border: none;
+}
+
+.btn-salvareentrar:hover {
+    background-color: var(--botão-claro-salvarentrar);
+    transform: translateY(-2px);
+}
+
+.btn-fechar:active,
+.btn-salvareentrar:active {
+    transform: scale(0.97);
+}
+
+/* INTERAÇÕES */
+
+.pesquisar i:hover,
+.cabecalho i:hover,
+.lista-item i:hover {
+    color: var(--cor-destaque);
+    text-shadow: 0 0 3px var(--cor-destaque);
+}
+
+.lista-item:hover {
+    transform: scale(1.005);
+}
+
+.lista-item-clique:active {
+    transform: scale(0.995);
+}
