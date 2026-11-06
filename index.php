@@ -1,6 +1,6 @@
 <?php
     require_once(dirname(__FILE__) . "\classes\\rb-mysql.php");
-    R::setup('mysql:host=localhost;dbname=todolist', 'root', '');
+    R::setup('mysql:host=localhost;dbname=todolist', 'root', 'aluno');
 
     #region Tarefas
 

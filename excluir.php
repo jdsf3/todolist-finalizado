@@ -1,7 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) . "\classes\\rb-mysql.php");
-R::setup('mysql:host=localhost;dbname=todolist', 'root', '');
+R::setup('mysql:host=localhost;dbname=todolist', 'root', 'aluno');
 
 $tipo = $_GET['tipo'] ?? '';
 $id = (int)($_GET['id'] ?? 0);
